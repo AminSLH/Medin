@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "240047024105",
+    "firebase_url": "https://medin-c092a-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "medin-c092a",
+    "storage_bucket": "medin-c092a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240047024105:android:6b7b6f49c689249feecd78",
+        "android_client_info": {
+          "package_name": "com.example.medin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240047024105-5b17pkbv9rjo4jgprbfonfbr88ma08a4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMDiUkoqHuU9MSuVNpPYJFlOFO841CocA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240047024105-5b17pkbv9rjo4jgprbfonfbr88ma08a4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "240047024105-lp4ik5g5vmchiqi50p58dv9tptsfftm6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.medin"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

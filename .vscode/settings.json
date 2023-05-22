@@ -1,0 +1,13 @@
+{
+     "files.exclude": {
+       "test":true,
+       ".*":false,
+       "web":true,
+       "build": true,
+       "windows":true,
+       "macos":true,
+       "ios":true,
+        "android":true,
+        "linux":true,
+     },
+}

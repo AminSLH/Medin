@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>240047024105-mko8vngf934hclun5qf76vcoahr1jk0c.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.240047024105-mko8vngf934hclun5qf76vcoahr1jk0c</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC_RD2fRfuSBRe9dRcHtzm5mCVKDhmivbY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>240047024105</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.medin.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>medin-c092a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>medin-c092a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:240047024105:ios:5a1ed108ca5818d1eecd78</string>
+	<key>DATABASE_URL</key>
+	<string>https://medin-c092a-default-rtdb.europe-west1.firebasedatabase.app</string>
+</dict>
+</plist>
