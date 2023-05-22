@@ -1,10 +1,10 @@
 class EquipmentModel {
-  final String id;
+  final String? id;
   final String? image;
-  final String title;
-  final String description;
-  final String type;
-  final String reservations;
+  final String? title;
+  final String? description;
+  final String? type;
+  final String? reservations;
 
   EquipmentModel(
       {required this.id,

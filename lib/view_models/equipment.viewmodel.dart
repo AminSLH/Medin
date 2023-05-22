@@ -8,12 +8,13 @@ import 'package:provider/provider.dart';
 import 'package:medin/repositories/equipment.repo.dart';
 
 class EquipmentViewModel with ChangeNotifier {
+  late EquipmentRepo equipmentRepo;
   late List<EquipmentModel> _equipment;
   List<EquipmentModel> get equipment => _equipment;
-  EquipmentRepo equipmentRepo =
-      Provider.of<EquipmentRepo>(navigatorKey.currentContext!, listen: true);
 
   EquipmentViewModel() {
+    EquipmentRepo equipmentRepo =
+        Provider.of<EquipmentRepo>(navigatorKey.currentContext!, listen: true);
     _equipment = equipmentRepo.fetchData();
     notifyListeners();
     equipmentRepo.addListener(() {

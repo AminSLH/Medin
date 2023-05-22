@@ -3,11 +3,11 @@ import 'package:medin/models/equipment.model.dart';
 
 class EquipmentCard extends StatelessWidget {
   late String? image;
-  late String title;
-  late String description;
-  late String id;
-  late String reservations;
-  late String type;
+  late String? title;
+  late String? description;
+  late String? id;
+  late String? reservations;
+  late String? type;
   EquipmentCard({required EquipmentModel equipment, Key? key}) {
     this.image = equipment.image;
     this.title = equipment.title;
@@ -41,22 +41,22 @@ class EquipmentCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  title ?? 'No title',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 8),
                 Text(
-                  description,
+                  type ?? 'No type',
                   style: TextStyle(fontSize: 16),
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'ID:' + id,
+                  'ID:' + (id ?? 'No ID'),
                   style: TextStyle(fontSize: 16),
                 ),
                 SizedBox(height: 8),
                 Text(
-                  description,
+                  description ?? 'No description',
                   style: TextStyle(fontSize: 16),
                 ),
               ],
