@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medin/models/content.model.dart';
 import 'package:medin/view_models/content.viewmodel.dart';
-import 'package:medin/views/courses.view.dart';
+import 'package:medin/views/course.view.dart';
 import 'package:medin/views/equipment.view.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +35,7 @@ class _ContentViewState extends State<ContentView> {
     Widget pageContent;
     switch (_currentPage) {
       case ContentPage.courses:
-        pageContent = CoursesView();
+        pageContent = CourseView();
         break;
       case ContentPage.equipment:
         pageContent = EquipmentView();

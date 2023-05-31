@@ -1,7 +1,7 @@
 class EquipmentModel {
   final String? id;
   final String? image;
-  final String? title;
+  final String? name;
   final String? description;
   final String? type;
   final String? reservations;
@@ -9,7 +9,7 @@ class EquipmentModel {
   EquipmentModel(
       {required this.id,
       this.image,
-      required this.title,
+      required this.name,
       required this.description,
       required this.type,
       required this.reservations});

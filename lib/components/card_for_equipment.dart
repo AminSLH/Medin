@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:medin/models/equipment.model.dart';
+import 'package:flutter/painting.dart';
 
 class EquipmentCard extends StatelessWidget {
   late String? image;
-  late String? title;
+  late String? name;
   late String? description;
   late String? id;
   late String? reservations;
   late String? type;
   EquipmentCard({required EquipmentModel equipment, Key? key}) {
     this.image = equipment.image;
-    this.title = equipment.title;
+    this.name = equipment.name;
     this.description = equipment.description;
     this.id = equipment.id;
     this.reservations = equipment.reservations;
@@ -29,8 +30,10 @@ class EquipmentCard extends StatelessWidget {
             height: 100,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(
-                    (image == null) ? "assets/question_mark.png" : image!),
+                image: (image == null)
+                    ? AssetImage("assets/question_mark.png")
+                    : NetworkImage(image!) as ImageProvider,
+                // : AssetImage("assets/question_mark.png"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -41,7 +44,7 @@ class EquipmentCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title ?? 'No title',
+                  name ?? 'No name',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 8),

@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:medin/models/course.model.dart';
 
 class CourseCard extends StatefulWidget {
-  final String image;
-  final String title;
-  final String description;
-  final String id;
-  final String instructor;
-  final String price;
-  final String date;
-  const CourseCard(
-      {Key? key,
-      required this.image,
-      required this.title,
-      required this.description,
-      required this.id,
-      required this.instructor,
-      required this.price,
-      required this.date})
-      : super(key: key);
+  late String? image;
+  late String? title;
+  late String? description;
+  late String? id;
+  late String? instructor;
+  late String? price;
+  late String? date;
+  CourseCard({required CourseModel course, Key? key}) {
+    this.image = course.image;
+    this.title = course.title;
+    this.description = course.description;
+    this.id = course.id;
+    this.instructor = course.instructor;
+    this.price = course.price;
+    this.date = course.date;
+  }
 
   @override
   _CourseCardState createState() => _CourseCardState();
@@ -42,7 +42,9 @@ class _CourseCardState extends State<CourseCard> {
             height: 100,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(widget.image),
+                image: (widget.image == null)
+                    ? AssetImage("assets/question_mark.png")
+                    : NetworkImage(widget.image!) as ImageProvider,
                 fit: BoxFit.cover,
               ),
             ),
@@ -58,12 +60,12 @@ class _CourseCardState extends State<CourseCard> {
                   style: TextStyle(fontSize: 8),
                 ),
                 Text(
-                  widget.title,
+                  widget.title ?? 'No title',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 8),
                 Text(
-                  widget.description,
+                  widget.description ?? 'No description',
                   style: TextStyle(fontSize: 16),
                 ),
                 SizedBox(height: 8),

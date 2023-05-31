@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:medin/components/card_for_equipment.dart';
 import 'package:medin/models/equipment.model.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 abstract class EquipmentRepo extends ChangeNotifier {
   List<EquipmentModel> equipmentList =
       List<EquipmentModel>.empty(growable: true);
   late Map<dynamic, dynamic> data;
   List<EquipmentModel> fetchData();
+  late Reference fbImagesRef;
 }
 
 class EquipmentRepoImpl extends EquipmentRepo {
   EquipmentRepoImpl() {
-    equipmentList = List<EquipmentModel>.empty(growable: true);
+    final fbStorage = FirebaseStorage.instance;
+    fbImagesRef = fbStorage.ref("images/equipment");
 
+    equipmentList = List<EquipmentModel>.empty(growable: true);
     final fbDatabase = FirebaseDatabase.instance;
     fbDatabase.setPersistenceEnabled(true);
     final fbEquipemtnRef = fbDatabase.ref("equipment");
@@ -22,61 +26,27 @@ class EquipmentRepoImpl extends EquipmentRepo {
     fbEquipemtnRef.onValue.listen((event) {
       Map<dynamic, dynamic> data =
           event.snapshot.value as Map<dynamic, dynamic>;
-      data.forEach((key, value) {
+      data.forEach((key, value) async {
         // print("%%%%key: $key, value: $value%%%%");
+        var url = (value['image'] == null)
+            ? null
+            : (await fbImagesRef.child(value['image']).getDownloadURL());
+        print(url);
         equipmentList.add(EquipmentModel(
             id: key,
             description: value['description'],
-            image: value['image'],
-            title: value['title'],
+            image: url,
+            name: value['name'],
             reservations: value['reservations'].toString(),
             type: value['type']));
+        notifyListeners();
       });
-
-      // var data = event.snapshot.value as Map<dynamic, dynamic>;
-      notifyListeners();
+      // print(equipmentList);
     });
   }
 
   @override
   List<EquipmentModel> fetchData() {
-    //Future.delayed(const Duration(milliseconds: 1000));
-
-    // return [
-    //   EquipmentModel(
-    //     id: '6060601',
-    //     image: 'assets/catalogue1.jpg',
-    //     title: 'Equipement 1',
-    //     description: 'Description 1 lorem ipsum lorem ipsum lorem ipsum',
-    //     type: 'test type 1',
-    //     reservations: 'test reservations 1',
-    //   ),
-    //   EquipmentModel(
-    //     id: '6060602',
-    //     image: 'assets/afdzcatalogue1.jpg',
-    //     title: 'Equipement 2',
-    //     description: 'Description 2 lorem ipsum lorem ipsum lorem ipsum',
-    //     type: 'test type 1',
-    //     reservations: 'test reservations 1',
-    //   ),
-    //   EquipmentModel(
-    //     id: '6060603',
-    //     image: 'assets/cataefdaefalogue1.jpg',
-    //     title: 'Equipement 3',
-    //     description: 'Description 3 lorem ipsum lorem ipsum lorem ipsum',
-    //     type: 'test type 1',
-    //     reservations: 'test reservations 1',
-    //   ),
-    //   EquipmentModel(
-    //     id: '6060604',
-    //     image: 'assets/aedcatalogue1.jpg',
-    //     title: 'Equipement 4',
-    //     description: 'Description 4 lorem ipsum lorem ipsum lorem ipsum',
-    //     type: 'test type 1',
-    //     reservations: 'test reservations 1',
-    //   ),
-    // ];
-
     return equipmentList;
   }
 }

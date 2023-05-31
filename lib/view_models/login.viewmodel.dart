@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medin/models/login.model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medin/utils/keys.dart';
-import 'package:medin/views/courses.view.dart';
+import 'package:medin/views/course.view.dart';
 import 'package:medin/views/equipment.view.dart';
 import 'package:medin/views/content.view.dart';
 
