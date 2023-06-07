@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:medin/models/content.model.dart';
+import 'package:medin/utils/keys.dart';
 import 'package:medin/view_models/content.viewmodel.dart';
 import 'package:medin/views/course.view.dart';
 import 'package:medin/views/equipment.view.dart';
+import 'package:medin/views/suggest_course.view.dart';
 import 'package:provider/provider.dart';
 import 'package:medin/views/suggest.view.dart';
 
@@ -57,7 +59,7 @@ class _ContentViewState extends State<ContentView> {
       ),
       drawer: Drawer(
         child: Container(
-          color: Colors.white,
+          //color: Colors.white,
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
@@ -70,9 +72,8 @@ class _ContentViewState extends State<ContentView> {
                     'https://randomuser.me/api/portraits/men/2.jpg',
                   ),
                 ),
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
+                // decoration: BoxDecoration(
+                //     color: Theme.of(context).colorScheme.secondary),
               ),
               ListTile(
                 leading: Icon(Icons.person),
@@ -123,13 +124,39 @@ class _ContentViewState extends State<ContentView> {
       body: Center(
         child: pageContent,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: [
+      floatingActionButton: _currentPage == ContentPage.courses
+          ? FloatingActionButton(
+              onPressed: () {
+                //push navigator to SuggestCourseView()
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return SuggestCourseView();
+                }));
+              },
+              child: const Icon(Icons.add),
+              // backgroundColor: Colors.blue,
+            )
+          : null,
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: [
           ContentPage.courses,
           ContentPage.equipment,
           ContentPage.suggest
         ].indexOf(_currentPage),
-        onTap: (index) {
+        destinations: [
+          NavigationDestination(
+            icon: Icon(Icons.group),
+            label: 'Courses',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.build),
+            label: 'Equipments',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.lightbulb),
+            label: 'Suggestions',
+          ),
+        ],
+        onDestinationSelected: (index) {
           switch (index) {
             case 0:
               _changePage(ContentPage.courses);
@@ -142,20 +169,6 @@ class _ContentViewState extends State<ContentView> {
               break;
           }
         },
-        items: const [
-          BottomNavigationBarItem(
-            label: 'Courses',
-            icon: Icon(Icons.group),
-          ),
-          BottomNavigationBarItem(
-            label: 'Equipments',
-            icon: Icon(Icons.build),
-          ),
-          BottomNavigationBarItem(
-            label: 'Suggestions',
-            icon: Icon(Icons.lightbulb),
-          ),
-        ],
       ),
     );
   }

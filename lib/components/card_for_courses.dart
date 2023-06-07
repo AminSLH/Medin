@@ -105,12 +105,12 @@ class _CourseCardState extends State<CourseCard> {
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.schedule, color: Colors.white),
+                            // Icon(Icons.schedule, color: Colors.white),
+                            Icon(Icons.schedule),
                             SizedBox(width: 8),
-                            Text(
-                              'En attente',
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            Text('En attente'
+                                // style: TextStyle(color: Colors.white),
+                                ),
                           ],
                         )
                       : Text('Réserver une place'),

@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:medin/firebase_options.dart';
 import 'package:medin/view_models/login.viewmodel.dart';
 import 'package:medin/view_models/signup.viewmodel.dart';
+import 'package:medin/view_models/suggest.viewmodel.dart';
+import 'package:medin/view_models/suggest_courses.viewmodel.dart';
 import 'package:medin/views/login.view.dart';
 import 'package:provider/provider.dart';
 import 'package:medin/utils/keys.dart';
@@ -12,6 +14,7 @@ import 'package:medin/view_models/content.viewmodel.dart';
 import 'package:medin/repositories/equipment.repo.dart';
 import 'package:medin/repositories/course.repo.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:medin/utils/color_schemes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,13 +50,16 @@ class _MyAppState extends State<MyApp> {
             create: (context) => SignUpViewModel()),
         ListenableProvider<LoginViewModel>(
             create: (context) => LoginViewModel()),
+        ListenableProvider<SuggestViewModel>(
+            create: (context) => SuggestViewModel()),
+        ListenableProvider<SuggestCoursesViewModel>(
+            create: (context) => SuggestCoursesViewModel()),
       ],
       child: MaterialApp(
         scaffoldMessengerKey: scaffoldMessengerKey,
         navigatorKey: navigatorKey,
-        theme: ThemeData(
-          useMaterial3: true,
-        ),
+        theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+        //darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
         title: 'MEDIN',
         home: LoginView(),
       ),

@@ -67,29 +67,28 @@ class _AuthTextFieldState extends State<AuthTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-  controller: widget.controller,
-  obscureText: widget.obscureText,
-  decoration: InputDecoration(
-    labelText: widget.labelText,
-    errorText: _errorMessage,
-    border: OutlineInputBorder(),
-    enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(
-        color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+      controller: widget.controller,
+      obscureText: widget.obscureText,
+      decoration: InputDecoration(
+        labelText: widget.labelText,
+        errorText: _errorMessage,
+        border: OutlineInputBorder(),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.primary,
+            width: 2,
+          ),
+        ),
+        labelStyle: TextStyle(
+          color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
+        ),
       ),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(
-        color: Theme.of(context).colorScheme.primary,
-        width: 2,
-      ),
-    ),
-    labelStyle: TextStyle(
-      color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
-    ),
-  ),
-  onChanged: _validateInput,
-);
-
+      onChanged: _validateInput,
+    );
   }
 }

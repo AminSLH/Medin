@@ -36,89 +36,92 @@ class _SuggestCourseViewState extends State<SuggestCourseView> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16),
-      child: Form(
-        key: _formKey,
-        child: ListView(
-          children: [
-            TextFormField(
-              controller: _subjectController,
-              decoration: InputDecoration(
-                labelText: 'Sujet de la formation',
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Veuillez saisir le sujet de la formation.';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              controller: _equipmentController,
-              decoration: InputDecoration(
-                labelText: 'Équipement requis',
-              ),
-            ),
-            ListTile(
-                title: Text(
-              'Date proposée:',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            )),
-            SizedBox(height: 8),
-            Row(
+    return Scaffold(
+        appBar: AppBar(title: Text('Suggérer une formation')),
+        body: Padding(
+          padding: EdgeInsets.all(16),
+          child: Form(
+            key: _formKey,
+            child: ListView(
               children: [
-                Expanded(
-                  child: Text(
-                    '${_date?.toLocal()}'.split(' ')[0],
-                    style: TextStyle(fontSize: 16),
+                TextFormField(
+                  controller: _subjectController,
+                  decoration: InputDecoration(
+                    labelText: 'Sujet de la formation',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Veuillez saisir le sujet de la formation.';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  controller: _equipmentController,
+                  decoration: InputDecoration(
+                    labelText: 'Équipement requis',
                   ),
                 ),
-                IconButton(
-                  icon: Icon(Icons.calendar_today),
-                  onPressed: () {
-                    _selectDate(context);
-                  },
+                ListTile(
+                    title: Text(
+                  'Date proposée:',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                )),
+                SizedBox(height: 8),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        '${_date?.toLocal()}'.split(' ')[0],
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.calendar_today),
+                      onPressed: () {
+                        _selectDate(context);
+                      },
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Details courses:',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Details',
-                border: OutlineInputBorder(),
-              ),
-              maxLines: 5,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // Form is valid, submit data here
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                SizedBox(height: 16),
+                Text(
+                  'Details courses:',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 8),
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'Details',
+                    border: OutlineInputBorder(),
+                  ),
+                  maxLines: 5,
+                ),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          // Form is valid, submit data here
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 24.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      child: Text('Soumettre'),
                     ),
                   ),
-                  child: Text('Soumettre'),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
+                )
+              ],
+            ),
+          ),
+        ));
   }
 }
