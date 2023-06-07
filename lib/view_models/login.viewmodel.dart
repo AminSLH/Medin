@@ -9,6 +9,8 @@ import 'package:medin/views/content.view.dart';
 class LoginViewModel with ChangeNotifier {
   final fbauth = FirebaseAuth.instance;
   LoginModel loginModel = LoginModel(email: 't', password: 't');
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   LoginViewModel() {
     fbauth.authStateChanges().listen((User? user) {
@@ -19,20 +21,13 @@ class LoginViewModel with ChangeNotifier {
     });
   }
 
-  void updateEmail(String value) {
-    loginModel = LoginModel(email: value, password: loginModel.password);
-  }
-
-  void updatePassword(String value) {
-    loginModel = LoginModel(email: loginModel.email, password: value);
-  }
-
-  Future<bool> mailAuth() async {
+  Future<void> mailAuth() async {
     try {
+      loginModel = LoginModel(
+          email: emailController.text, password: passwordController.text);
       await fbauth.signInWithEmailAndPassword(
           email: loginModel.email, password: loginModel.password);
       debugPrint('true');
-      return true;
     } on FirebaseAuthException catch (e) {
       ScaffoldMessengerState messengerState =
           scaffoldMessengerKey.currentState!;
@@ -63,6 +58,21 @@ class LoginViewModel with ChangeNotifier {
       }
     }
     debugPrint('false');
-    return false;
+  }
+
+  Future<void> guestAuth() async {
+    try {
+      await fbauth.signInAnonymously();
+    } on FirebaseAuthException {
+      ScaffoldMessengerState messengerState =
+          scaffoldMessengerKey.currentState!;
+      messengerState.showSnackBar(
+        SnackBar(
+          content: Text('Failed to login as guest.'),
+          showCloseIcon: true,
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
   }
 }

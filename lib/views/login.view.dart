@@ -50,7 +50,7 @@ class _LoginViewState extends State<LoginView> {
                             }
                             return null;
                           },
-                          onChanged: _loginViewModel.updateEmail,
+                          controller: _loginViewModel.emailController,
                         ),
                         TextFormField(
                           decoration: InputDecoration(labelText: 'Password'),
@@ -61,7 +61,7 @@ class _LoginViewState extends State<LoginView> {
                             }
                             return null;
                           },
-                          onChanged: _loginViewModel.updatePassword,
+                          controller: _loginViewModel.passwordController,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 16.0),
@@ -84,15 +84,7 @@ class _LoginViewState extends State<LoginView> {
                                 child: const Text('Sign up'),
                               ),
                               ElevatedButton(
-                                onPressed: () {
-                                  // //guestAuth();
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) =>
-                                  //           const CoursesView()),
-                                  // );
-                                },
+                                onPressed: _loginViewModel.guestAuth,
                                 child: const Text('Guest Mode'),
                               ),
                             ],

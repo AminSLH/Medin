@@ -3,11 +3,11 @@
        "test":true,
        ".*":false,
        "web":true,
-       "build": true,
+       "build": false,
        "windows":true,
        "macos":true,
        "ios":true,
-        "android":true,
+        "android":false,
         "linux":true,
      },
 }

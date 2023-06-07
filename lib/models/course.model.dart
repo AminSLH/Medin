@@ -1,5 +1,4 @@
 class CourseModel {
-  final String? image;
   final String? title;
   final String? description;
   final String? id;
@@ -9,7 +8,6 @@ class CourseModel {
 
   CourseModel(
       {required this.id,
-      this.image,
       required this.title,
       required this.description,
       required this.instructor,

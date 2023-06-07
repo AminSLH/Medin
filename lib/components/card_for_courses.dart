@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:medin/models/course.model.dart';
 
 class CourseCard extends StatefulWidget {
-  late String? image;
   late String? title;
   late String? description;
   late String? id;
@@ -10,7 +9,6 @@ class CourseCard extends StatefulWidget {
   late String? price;
   late String? date;
   CourseCard({required CourseModel course, Key? key}) {
-    this.image = course.image;
     this.title = course.title;
     this.description = course.description;
     this.id = course.id;
@@ -37,19 +35,7 @@ class _CourseCardState extends State<CourseCard> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: (widget.image == null)
-                    ? AssetImage("assets/question_mark.png")
-                    : NetworkImage(widget.image!) as ImageProvider,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SizedBox(width: 16),
+          //SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SuggestView extends StatefulWidget {
-  const SuggestView({Key? key}) : super(key: key);
+class SuggestCourseView extends StatefulWidget {
+  const SuggestCourseView({Key? key}) : super(key: key);
 
   @override
-  _SuggestViewState createState() => _SuggestViewState();
+  _SuggestCourseViewState createState() => _SuggestCourseViewState();
 }
 
-class _SuggestViewState extends State<SuggestView> {
+class _SuggestCourseViewState extends State<SuggestCourseView> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -45,21 +45,49 @@ class _SuggestViewState extends State<SuggestView> {
             TextFormField(
               controller: _subjectController,
               decoration: InputDecoration(
-                labelText: 'Sujet',
+                labelText: 'Sujet de la formation',
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Veuillez saisir le sujet.';
+                  return 'Veuillez saisir le sujet de la formation.';
                 }
                 return null;
               },
             ),
-            //SizedBox(height: 16),
+            TextFormField(
+              controller: _equipmentController,
+              decoration: InputDecoration(
+                labelText: 'Équipement requis',
+              ),
+            ),
+            ListTile(
+                title: Text(
+              'Date proposée:',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            )),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    '${_date?.toLocal()}'.split(' ')[0],
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.calendar_today),
+                  onPressed: () {
+                    _selectDate(context);
+                  },
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
             Text(
-              'Détails:',
+              'Details courses:',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            //SizedBox(height: 8),
+            SizedBox(height: 8),
             TextFormField(
               decoration: InputDecoration(
                 hintText: 'Details',

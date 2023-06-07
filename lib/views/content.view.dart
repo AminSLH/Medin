@@ -42,8 +42,8 @@ class _ContentViewState extends State<ContentView> {
         pageContent = EquipmentView();
         break;
       case ContentPage.suggest:
-        //pageContent = SuggestView();
-        pageContent = CourseView();
+        pageContent = SuggestView();
+        // pageContent = CourseView();
         break;
       default:
         pageContent = const Center(
@@ -62,7 +62,8 @@ class _ContentViewState extends State<ContentView> {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text('John Doe'),
+                accountName: Text(
+                    _contentViewModel.currentUser?.displayName ?? "no name"),
                 accountEmail: Text('johndoe@example.com'),
                 currentAccountPicture: CircleAvatar(
                   backgroundImage: NetworkImage(

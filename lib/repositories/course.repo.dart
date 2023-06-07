@@ -25,13 +25,9 @@ class CourseRepoImpl extends CourseRepo {
       Map<dynamic, dynamic> data =
           event.snapshot.value as Map<dynamic, dynamic>;
       data.forEach((key, value) async {
-        var url = (value['image'] == null)
-            ? null
-            : (await fbImagesRef.child(value['image']).getDownloadURL());
         courseList.add(CourseModel(
           id: key,
           description: value['description'],
-          image: url,
           title: value['title'],
           instructor: value['instructor'],
           price: value['price'],
