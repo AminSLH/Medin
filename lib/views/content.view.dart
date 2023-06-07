@@ -4,6 +4,7 @@ import 'package:medin/view_models/content.viewmodel.dart';
 import 'package:medin/views/course.view.dart';
 import 'package:medin/views/equipment.view.dart';
 import 'package:provider/provider.dart';
+import 'package:medin/views/suggest.view.dart';
 
 class ContentView extends StatefulWidget {
   const ContentView({Key? key}) : super(key: key);
@@ -40,9 +41,10 @@ class _ContentViewState extends State<ContentView> {
       case ContentPage.equipment:
         pageContent = EquipmentView();
         break;
-      // case 'suggest':
-      //   pageContent = SuggestView();
-      //break;
+      case ContentPage.suggest:
+        //pageContent = SuggestView();
+        pageContent = CourseView();
+        break;
       default:
         pageContent = const Center(
           child: Text('Invalid page'),

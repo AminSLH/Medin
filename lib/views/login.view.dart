@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medin/view_models/login.viewmodel.dart';
-import 'package:medin/views/course.view.dart';
 import 'package:medin/views/signup.view.dart';
 import 'package:provider/provider.dart';
 

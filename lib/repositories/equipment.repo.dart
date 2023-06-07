@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medin/components/card_for_equipment.dart';
 import 'package:medin/models/equipment.model.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -31,7 +30,6 @@ class EquipmentRepoImpl extends EquipmentRepo {
         var url = (value['image'] == null)
             ? null
             : (await fbImagesRef.child(value['image']).getDownloadURL());
-        print(url);
         equipmentList.add(EquipmentModel(
             id: key,
             description: value['description'],

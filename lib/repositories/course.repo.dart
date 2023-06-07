@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medin/components/card_for_courses.dart';
 import 'package:medin/models/course.model.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -26,11 +25,9 @@ class CourseRepoImpl extends CourseRepo {
       Map<dynamic, dynamic> data =
           event.snapshot.value as Map<dynamic, dynamic>;
       data.forEach((key, value) async {
-        // print("%%%%key: $key, value: $value%%%%");
         var url = (value['image'] == null)
             ? null
             : (await fbImagesRef.child(value['image']).getDownloadURL());
-        print(url);
         courseList.add(CourseModel(
           id: key,
           description: value['description'],
@@ -42,7 +39,6 @@ class CourseRepoImpl extends CourseRepo {
         ));
         notifyListeners();
       });
-      // print(courseList);
     });
   }
 
