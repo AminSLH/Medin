@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medin/utils/keys.dart';
 import 'package:medin/views/login.view.dart';
-import 'package:medin/models/user_medin.model.dart';
 
 class ContentViewModel with ChangeNotifier {
   final fbauth = FirebaseAuth.instance;
@@ -12,7 +11,7 @@ class ContentViewModel with ChangeNotifier {
     fbauth.authStateChanges().listen((User? user) {
       if (user == null) {
         navigatorKey.currentState
-            ?.pushReplacement(MaterialPageRoute(builder: (_) => LoginView()));
+            ?.pushReplacement(MaterialPageRoute(builder: (_) => const LoginView()));
       }
     });
   }

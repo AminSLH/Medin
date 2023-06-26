@@ -4,7 +4,7 @@ import 'package:medin/views/signup.view.dart';
 import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
-  LoginView({Key? key}) : super(key: key);
+  const LoginView({Key? key}) : super(key: key);
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -17,7 +17,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   void initState() {
     super.initState();
-    this._loginViewModel = Provider.of<LoginViewModel>(context, listen: false);
+    _loginViewModel = Provider.of<LoginViewModel>(context, listen: false);
     // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
   }
 
@@ -25,7 +25,7 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
         automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
@@ -36,14 +36,14 @@ class _LoginViewState extends State<LoginView> {
               children: [
                 Image.asset('assets/logos/LOGO.png'),
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Form(
                     key: _formKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         TextFormField(
-                          decoration: InputDecoration(labelText: 'Email'),
+                          decoration: const InputDecoration(labelText: 'Email'),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter your email';
@@ -53,7 +53,8 @@ class _LoginViewState extends State<LoginView> {
                           controller: _loginViewModel.emailController,
                         ),
                         TextFormField(
-                          decoration: InputDecoration(labelText: 'Password'),
+                          decoration:
+                              const InputDecoration(labelText: 'Password'),
                           obscureText: true,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -70,7 +71,7 @@ class _LoginViewState extends State<LoginView> {
                             children: [
                               ElevatedButton(
                                 onPressed: _loginViewModel.mailAuth,
-                                child: Text('Login'),
+                                child: const Text('Login'),
                               ),
                               ElevatedButton(
                                 onPressed: () {

@@ -8,13 +8,15 @@ class CourseCard extends StatefulWidget {
   late String? instructor;
   late String? price;
   late String? date;
-  CourseCard({required CourseModel course, Key? key}) {
-    this.title = course.title;
-    this.description = course.description;
-    this.id = course.id;
-    this.instructor = course.instructor;
-    this.price = course.price;
-    this.date = course.date;
+  late int seatsRemaining;
+  CourseCard({super.key, required CourseModel course}) {
+    title = course.title;
+    description = course.description;
+    id = course.id;
+    instructor = course.instructor;
+    price = course.price;
+    date = course.date;
+    seatsRemaining = course.seatsRemaining;
   }
 
   @override
@@ -22,16 +24,15 @@ class CourseCard extends StatefulWidget {
 }
 
 class _CourseCardState extends State<CourseCard> {
-  int seats = 24;
   bool isSpotReserved = false;
-  bool isSpotAvailable(seats) {
-    return seats > 0;
+  bool isSpotAvailable(seatsRemaining) {
+    return seatsRemaining > 0;
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -40,69 +41,76 @@ class _CourseCardState extends State<CourseCard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
-                  '$widget.date',
-                  style: TextStyle(fontSize: 8),
+                  widget.date ?? 'No date',
+                  style: const TextStyle(fontSize: 8),
                 ),
                 Text(
                   widget.title ?? 'No title',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   widget.description ?? 'No description',
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
-                  'Places restantes: $seats',
-                  style: TextStyle(fontSize: 16),
+                  'Places restantes: ${widget.seatsRemaining ?? 'Inconnu'}',
+                  style: const TextStyle(fontSize: 16),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: isSpotReserved || !isSpotAvailable(seats)
-                      ? null
-                      : () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text('Confirmation'),
-                                content: Text(
-                                  'Voulez-vous réserver une place pour cette formation ?',
-                                ),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text('Annuler'),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        isSpotReserved = true;
-                                      });
-                                      Navigator.of(context).pop();
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'Votre demande est en attente de confirmation.',
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: Text('Confirmer'),
-                                  ),
-                                ],
+                  onPressed:
+                      isSpotReserved || !isSpotAvailable(widget.seatsRemaining)
+                          ? null
+                          : () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: const Text('Confirmation'),
+                                    content: const Text(
+                                      'Voulez-vous réserver une place pour cette formation ?',
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('Annuler'),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            isSpotReserved = true;
+                                          });
+                                          Navigator.of(context).pop();
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                'Votre demande est en attente de confirmation.',
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: const Text('Confirmer'),
+                                      ),
+                                    ],
+                                  );
+                                },
                               );
                             },
-                          );
-                        },
+                  style: isSpotReserved
+                      ? ElevatedButton.styleFrom(
+                          backgroundColor: Colors.yellow[700],
+                        )
+                      : null,
                   child: isSpotReserved
-                      ? Row(
+                      ? const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             // Icon(Icons.schedule, color: Colors.white),
@@ -113,14 +121,9 @@ class _CourseCardState extends State<CourseCard> {
                                 ),
                           ],
                         )
-                      : Text('Réserver une place'),
-                  style: isSpotReserved
-                      ? ElevatedButton.styleFrom(
-                          primary: Colors.yellow[700],
-                        )
-                      : null,
+                      : const Text('Réserver une place'),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
               ],
             ),
           ),

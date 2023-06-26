@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:medin/view_models/equipment.viewmodel.dart';
-import 'package:medin/views/course.view.dart';
 import 'package:provider/provider.dart';
 import 'package:medin/components/card_for_equipment.dart';
 import 'package:medin/models/equipment.model.dart';
 
 class EquipmentView extends StatefulWidget {
-  EquipmentView({Key? key}) : super(key: key);
+  const EquipmentView({Key? key}) : super(key: key);
 
   @override
   State<EquipmentView> createState() => _EquipmentViewState();

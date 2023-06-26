@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medin/models/content.model.dart';
-import 'package:medin/utils/keys.dart';
 import 'package:medin/view_models/content.viewmodel.dart';
 import 'package:medin/views/course.view.dart';
 import 'package:medin/views/equipment.view.dart';
@@ -28,8 +27,7 @@ class _ContentViewState extends State<ContentView> {
   @override
   void initState() {
     super.initState();
-    this._contentViewModel =
-        Provider.of<ContentViewModel>(context, listen: false);
+    _contentViewModel = Provider.of<ContentViewModel>(context, listen: false);
     // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
   }
 
@@ -38,13 +36,13 @@ class _ContentViewState extends State<ContentView> {
     Widget pageContent;
     switch (_currentPage) {
       case ContentPage.courses:
-        pageContent = CourseView();
+        pageContent = const CourseView();
         break;
       case ContentPage.equipment:
-        pageContent = EquipmentView();
+        pageContent = const EquipmentView();
         break;
       case ContentPage.suggest:
-        pageContent = SuggestView();
+        pageContent = const SuggestView();
         // pageContent = CourseView();
         break;
       default:
@@ -65,9 +63,9 @@ class _ContentViewState extends State<ContentView> {
             children: [
               UserAccountsDrawerHeader(
                 accountName: Text(
-                    _contentViewModel.currentUser?.displayName ?? "no name"),
-                accountEmail: Text('johndoe@example.com'),
-                currentAccountPicture: CircleAvatar(
+                    _contentViewModel.currentUser?.displayName ?? 'tester one'),
+                accountEmail: const Text('tester1@example.com'),
+                currentAccountPicture: const CircleAvatar(
                   backgroundImage: NetworkImage(
                     'https://randomuser.me/api/portraits/men/2.jpg',
                   ),
@@ -76,15 +74,15 @@ class _ContentViewState extends State<ContentView> {
                 //     color: Theme.of(context).colorScheme.secondary),
               ),
               ListTile(
-                leading: Icon(Icons.person),
-                title: Text('Profil'),
+                leading: const Icon(Icons.person),
+                title: const Text('Profil'),
                 onTap: () {
                   // naviguer vers l'écran de profil de l'utilisateur
                 },
               ),
               ListTile(
-                leading: Icon(Icons.menu_book),
-                title: Text('Vos formations'),
+                leading: const Icon(Icons.menu_book),
+                title: const Text('Vos formations'),
                 onTap: () {
                   //TODO: add archive page
 
@@ -104,17 +102,17 @@ class _ContentViewState extends State<ContentView> {
           },
           
         ),*/
-              Divider(),
+              const Divider(),
               ListTile(
-                leading: Icon(Icons.help),
-                title: Text('Aide et commentaires'),
+                leading: const Icon(Icons.help),
+                title: const Text('Aide et commentaires'),
                 onTap: () {
                   // naviguer vers l'écran d'aide et de commentaires
                 },
               ),
               ListTile(
-                leading: Icon(Icons.power_settings_new),
-                title: Text('Déconnexion'),
+                leading: const Icon(Icons.power_settings_new),
+                title: const Text('Déconnexion'),
                 onTap: _contentViewModel.logout,
               ),
             ],
@@ -129,7 +127,7 @@ class _ContentViewState extends State<ContentView> {
               onPressed: () {
                 //push navigator to SuggestCourseView()
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return SuggestCourseView();
+                  return const SuggestCourseView();
                 }));
               },
               child: const Icon(Icons.add),
@@ -142,7 +140,7 @@ class _ContentViewState extends State<ContentView> {
           ContentPage.equipment,
           ContentPage.suggest
         ].indexOf(_currentPage),
-        destinations: [
+        destinations: const [
           NavigationDestination(
             icon: Icon(Icons.group),
             label: 'Courses',

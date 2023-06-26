@@ -5,7 +5,7 @@ class AuthTextField extends StatefulWidget {
   final String labelText;
   final bool obscureText;
 
-  AuthTextField(this.controller, this.labelText, this.obscureText);
+  const AuthTextField(this.controller, this.labelText, this.obscureText, {super.key});
 
   @override
   _AuthTextFieldState createState() => _AuthTextFieldState();
@@ -72,7 +72,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
       decoration: InputDecoration(
         labelText: widget.labelText,
         errorText: _errorMessage,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Theme.of(context).colorScheme.primary.withOpacity(0.7),

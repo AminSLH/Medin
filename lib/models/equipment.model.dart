@@ -4,7 +4,7 @@ class EquipmentModel {
   final String? name;
   final String? description;
   final String? type;
-  final String? reservations;
+  final List<String>? reservations;
 
   EquipmentModel(
       {required this.id,

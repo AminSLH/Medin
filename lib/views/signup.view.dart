@@ -26,7 +26,7 @@ class _SignUpViewState extends State<SignUpView> {
   @override
   void initState() {
     super.initState();
-    this._signUpViewModel =
+    _signUpViewModel =
         Provider.of<SignUpViewModel>(context, listen: false);
     // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
   }

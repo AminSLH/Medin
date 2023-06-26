@@ -24,10 +24,12 @@ void main() async {
     androidProvider: AndroidProvider.debug,
   );
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -61,7 +63,8 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
         //darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
         title: 'MEDIN',
-        home: LoginView(),
+        debugShowCheckedModeBanner: false,
+        home: const LoginView(),
       ),
     );
   }

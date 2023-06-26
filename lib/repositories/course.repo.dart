@@ -13,12 +13,12 @@ abstract class CourseRepo extends ChangeNotifier {
 class CourseRepoImpl extends CourseRepo {
   CourseRepoImpl() {
     final fbStorage = FirebaseStorage.instance;
-    fbImagesRef = fbStorage.ref("images/course");
+    fbImagesRef = fbStorage.ref('images/course');
 
     courseList = List<CourseModel>.empty(growable: true);
     final fbDatabase = FirebaseDatabase.instance;
     fbDatabase.setPersistenceEnabled(true);
-    final fbEquipemtnRef = fbDatabase.ref("Trainings");
+    final fbEquipemtnRef = fbDatabase.ref('Trainings');
     fbEquipemtnRef.keepSynced(true);
 
     fbEquipemtnRef.onValue.listen((event) {
@@ -32,6 +32,11 @@ class CourseRepoImpl extends CourseRepo {
           instructor: value['instructor'],
           price: value['price'],
           date: value['date'],
+          seatsRemaining: value['spotsAvailable'],
+          time: null,
+          attendees: null,
+          equipmentReserved: null,
+          state: null,
         ));
         notifyListeners();
       });

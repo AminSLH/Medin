@@ -37,14 +37,14 @@ class _SuggestViewState extends State<SuggestView> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Form(
         key: _formKey,
         child: ListView(
           children: [
             TextFormField(
               controller: _subjectController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Sujet',
               ),
               validator: (value) {
@@ -55,20 +55,20 @@ class _SuggestViewState extends State<SuggestView> {
               },
             ),
             //SizedBox(height: 16),
-            Text(
+            const Text(
               'Détails:',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             //SizedBox(height: 8),
             TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Details',
                 border: OutlineInputBorder(),
               ),
               maxLines: 5,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -79,12 +79,12 @@ class _SuggestViewState extends State<SuggestView> {
                   },
                   style: ElevatedButton.styleFrom(
                     padding:
-                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+                        const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                  child: Text('Soumettre'),
+                  child: const Text('Soumettre'),
                 ),
               ),
             )

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medin/models/course.model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medin/utils/keys.dart';
-import 'package:medin/views/course.view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:medin/repositories/course.repo.dart';

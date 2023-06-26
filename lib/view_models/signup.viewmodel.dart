@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medin/models/login.model.dart';
 import 'package:medin/utils/keys.dart';
 import 'package:medin/views/content.view.dart';
-import 'package:medin/views/course.view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -18,7 +16,7 @@ class SignUpViewModel with ChangeNotifier {
     fbauth.authStateChanges().listen((User? user) {
       if (user != null) {
         navigatorKey.currentState
-            ?.push(MaterialPageRoute(builder: (_) => ContentView()));
+            ?.push(MaterialPageRoute(builder: (_) => const ContentView()));
       }
     });
   }
@@ -30,7 +28,7 @@ class SignUpViewModel with ChangeNotifier {
       String name,
       String phoneNumber,
       BuildContext context) async {
-    DatabaseReference databaseRef = database.ref("users/");
+    DatabaseReference databaseRef = database.ref('users/');
     if (name.length < 3 || !RegExp(r'^[a-zA-Z ]+$').hasMatch(name)) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Please enter a valid name.'),
@@ -74,10 +72,10 @@ class SignUpViewModel with ChangeNotifier {
       FirebaseAuth.instance.userChanges().listen((User? user) async {
         if (user != null) {
           await databaseRef.child(user.uid).set({
-            "email": emailAddress,
-            "name": name,
-            "number": phoneNumber,
-            "role": "EndUser"
+            'email': emailAddress,
+            'name': name,
+            'number': phoneNumber,
+            'role': 'EndUser'
           });
 
           print('User is signed in!');

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:medin/models/login.model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medin/utils/keys.dart';
-import 'package:medin/views/course.view.dart';
-import 'package:medin/views/equipment.view.dart';
 import 'package:medin/views/content.view.dart';
 
 class LoginViewModel with ChangeNotifier {
@@ -15,8 +13,8 @@ class LoginViewModel with ChangeNotifier {
   LoginViewModel() {
     fbauth.authStateChanges().listen((User? user) {
       if (user != null) {
-        navigatorKey.currentState
-            ?.push(MaterialPageRoute(builder: (_) => ContentView()));
+        navigatorKey.currentState?.pushReplacement(
+            MaterialPageRoute(builder: (_) => const ContentView()));
       }
     });
   }
@@ -33,7 +31,7 @@ class LoginViewModel with ChangeNotifier {
           scaffoldMessengerKey.currentState!;
       if (e.code == 'user-not-found') {
         messengerState.showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('No user found for that email.'),
             showCloseIcon: true,
             duration: Duration(seconds: 2),
@@ -41,7 +39,7 @@ class LoginViewModel with ChangeNotifier {
         );
       } else if (e.code == 'wrong-password') {
         messengerState.showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Wrong password.'),
             showCloseIcon: true,
             duration: Duration(seconds: 2),
@@ -49,7 +47,7 @@ class LoginViewModel with ChangeNotifier {
         );
       } else {
         messengerState.showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Login Failed.'),
             showCloseIcon: true,
             duration: Duration(seconds: 2),
@@ -67,7 +65,7 @@ class LoginViewModel with ChangeNotifier {
       ScaffoldMessengerState messengerState =
           scaffoldMessengerKey.currentState!;
       messengerState.showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Failed to login as guest.'),
           showCloseIcon: true,
           duration: Duration(seconds: 2),

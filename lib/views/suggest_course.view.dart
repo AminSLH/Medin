@@ -37,16 +37,16 @@ class _SuggestCourseViewState extends State<SuggestCourseView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Suggérer une formation')),
+        appBar: AppBar(title: const Text('Suggérer une formation')),
         body: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Form(
             key: _formKey,
             child: ListView(
               children: [
                 TextFormField(
                   controller: _subjectController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Sujet de la formation',
                   ),
                   validator: (value) {
@@ -58,48 +58,48 @@ class _SuggestCourseViewState extends State<SuggestCourseView> {
                 ),
                 TextFormField(
                   controller: _equipmentController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Équipement requis',
                   ),
                 ),
-                ListTile(
+                const ListTile(
                     title: Text(
                   'Date proposée:',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 )),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Row(
                   children: [
                     Expanded(
                       child: Text(
-                        '${_date?.toLocal()}'.split(' ')[0],
-                        style: TextStyle(fontSize: 16),
+                        '${(_date ?? DateTime.now()).toLocal()}'.split(' ')[0],
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.calendar_today),
+                      icon: const Icon(Icons.calendar_today),
                       onPressed: () {
                         _selectDate(context);
                       },
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
-                Text(
-                  'Details courses:',
+                const SizedBox(height: 16),
+                const Text(
+                  'Détails:',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Details',
+                  decoration: const InputDecoration(
+                    hintText: 'Détails',
                     border: OutlineInputBorder(),
                   ),
                   maxLines: 5,
                 ),
                 Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 16.0, horizontal: 16.0),
                   child: SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -109,13 +109,13 @@ class _SuggestCourseViewState extends State<SuggestCourseView> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             vertical: 16.0, horizontal: 24.0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                      child: Text('Soumettre'),
+                      child: const Text('Soumettre'),
                     ),
                   ),
                 )
