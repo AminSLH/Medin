@@ -12,7 +12,6 @@ class CourseView extends StatefulWidget {
 }
 
 class _CourseViewState extends State<CourseView> {
-  late CourseViewModel _courseViewModel;
   late List<CourseModel> courseList;
 
   @override

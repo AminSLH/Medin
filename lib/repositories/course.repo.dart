@@ -13,7 +13,6 @@ abstract class CourseRepo extends ChangeNotifier {
 class CourseRepoImpl extends CourseRepo {
   CourseRepoImpl() {
     final fbStorage = FirebaseStorage.instance;
-    fbImagesRef = fbStorage.ref('images/course');
 
     courseList = List<CourseModel>.empty(growable: true);
     final fbDatabase = FirebaseDatabase.instance;
