@@ -33,7 +33,7 @@ class SuggestCoursesViewModel with ChangeNotifier {
       attendees: [fbauth.currentUser!.uid],
       equipmentReserved: List.from(equipmentController.text.split(',')),
       instructor: 'UNASSIGNED',
-      time: '00:00',
+      time: '09:15',
       seatsRemaining: 0,
       state: 'Requested',
     ));

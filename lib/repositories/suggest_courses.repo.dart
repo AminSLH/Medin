@@ -27,7 +27,6 @@ class SuggestCoursesRepoImpl extends SuggestCoursesRepo {
       'time': courseModel.time,
       'spotsAvailable': courseModel.seatsRemaining,
       'state': courseModel.state,
-      'time': '09:30',
     });
   }
 }
