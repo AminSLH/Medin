@@ -24,9 +24,10 @@ class SuggestCoursesRepoImpl extends SuggestCoursesRepo {
       'attendees': courseModel.attendees,
       'equipmentReserved': courseModel.equipmentReserved,
       'instructor': courseModel.instructor,
-      'Time': courseModel.time,
-      'SeatsRemaining': courseModel.seatsRemaining,
-      'State': courseModel.state,
+      'time': courseModel.time,
+      'spotsAvailable': courseModel.seatsRemaining,
+      'state': courseModel.state,
+      'time': '09:30',
     });
   }
 }
