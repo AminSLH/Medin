@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:medin/view_models/suggest_courses.viewmodel.dart';
 
 class SuggestCourseView extends StatefulWidget {
   const SuggestCourseView({Key? key}) : super(key: key);
@@ -8,31 +10,30 @@ class SuggestCourseView extends StatefulWidget {
 }
 
 class _SuggestCourseViewState extends State<SuggestCourseView> {
+  late SuggestCoursesViewModel _suggestCourseViewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _suggestCourseViewModel =
+        Provider.of<SuggestCoursesViewModel>(context, listen: false);
+  }
+
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: _date ?? DateTime.now(),
+      initialDate: DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime(2100),
     );
     if (picked != null) {
       setState(() {
-        _date = picked;
+        _suggestCourseViewModel.date = picked;
       });
     }
   }
 
   final _formKey = GlobalKey<FormState>();
-  final _subjectController = TextEditingController();
-  final _equipmentController = TextEditingController();
-  DateTime? _date;
-
-  @override
-  void dispose() {
-    _subjectController.dispose();
-    _equipmentController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class _SuggestCourseViewState extends State<SuggestCourseView> {
             child: ListView(
               children: [
                 TextFormField(
-                  controller: _subjectController,
+                  controller: _suggestCourseViewModel.subjectController,
                   decoration: const InputDecoration(
                     labelText: 'Sujet de la formation',
                   ),
@@ -57,7 +58,7 @@ class _SuggestCourseViewState extends State<SuggestCourseView> {
                   },
                 ),
                 TextFormField(
-                  controller: _equipmentController,
+                  controller: _suggestCourseViewModel.equipmentController,
                   decoration: const InputDecoration(
                     labelText: 'Équipement requis',
                   ),
@@ -72,7 +73,8 @@ class _SuggestCourseViewState extends State<SuggestCourseView> {
                   children: [
                     Expanded(
                       child: Text(
-                        '${(_date ?? DateTime.now()).toLocal()}'.split(' ')[0],
+                        '${(_suggestCourseViewModel.date ?? DateTime.now()).toLocal()}'
+                            .split(' ')[0],
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
@@ -91,6 +93,7 @@ class _SuggestCourseViewState extends State<SuggestCourseView> {
                 ),
                 const SizedBox(height: 8),
                 TextFormField(
+                  controller: _suggestCourseViewModel.bodyController,
                   decoration: const InputDecoration(
                     hintText: 'Détails',
                     border: OutlineInputBorder(),
@@ -106,6 +109,7 @@ class _SuggestCourseViewState extends State<SuggestCourseView> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           // Form is valid, submit data here
+                          _suggestCourseViewModel.submit();
                         }
                       },
                       style: ElevatedButton.styleFrom(

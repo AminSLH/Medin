@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:medin/firebase_options.dart';
+import 'package:medin/repositories/suggest.repo.dart';
+import 'package:medin/repositories/suggest_courses.repo.dart';
 import 'package:medin/view_models/login.viewmodel.dart';
 import 'package:medin/view_models/signup.viewmodel.dart';
 import 'package:medin/view_models/suggest.viewmodel.dart';
@@ -39,6 +41,13 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ListenableProvider<SuggestCoursesRepo>(
+            create: (context) => SuggestCoursesRepoImpl()),
+        ListenableProvider<SuggestCoursesViewModel>(
+            create: (context) => SuggestCoursesViewModel()),
+        ListenableProvider<SuggestRepo>(create: (context) => SuggestRepoImpl()),
+        ListenableProvider<SuggestViewModel>(
+            create: (context) => SuggestViewModel()),
         ListenableProvider<CourseRepo>(create: (context) => CourseRepoImpl()),
         ListenableProvider<CourseViewModel>(
             create: (context) => CourseViewModel()),

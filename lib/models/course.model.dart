@@ -3,7 +3,6 @@ class CourseModel {
   final String? description;
   final String? id;
   final String? instructor;
-  final String? price;
   final String? date;
   final String? time;
   final int seatsRemaining;
@@ -16,7 +15,6 @@ class CourseModel {
       required this.title,
       required this.description,
       required this.instructor,
-      required this.price,
       required this.date,
       required this.time,
       required this.seatsRemaining,

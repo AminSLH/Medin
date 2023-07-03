@@ -1,23 +1,26 @@
 import 'package:medin/models/user_medin.model.dart';
+import 'package:random_string/random_string.dart';
 
 class SuggestModel {
-  UserMedinModel? userMedinModel;
+  late String id;
+  String? user_id;
   String subject;
   String? body;
-  String datetime;
+  DateTime datetime;
   SuggestionState? state;
 
   SuggestModel({
-    this.userMedinModel,
+    this.user_id,
     required this.subject,
     this.body,
     required this.datetime,
-    this.state = SuggestionState.pending,
-  });
+    this.state = SuggestionState.unread,
+  }) {
+    this.id = randomAlphaNumeric(10).toUpperCase();
+  }
 }
 
 enum SuggestionState {
-  pending,
-  accepted,
-  refused,
+  read,
+  unread,
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:medin/view_models/suggest.viewmodel.dart';
+import 'package:provider/provider.dart';
 
 class SuggestView extends StatefulWidget {
   const SuggestView({Key? key}) : super(key: key);
@@ -8,12 +10,21 @@ class SuggestView extends StatefulWidget {
 }
 
 class _SuggestViewState extends State<SuggestView> {
+  late SuggestViewModel _suggestViewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _suggestViewModel = Provider.of<SuggestViewModel>(context, listen: false);
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
+  }
+
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: _date ?? DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2100),
+      firstDate: DateTime(1999),
+      lastDate: DateTime(2199),
     );
     if (picked != null) {
       setState(() {
@@ -23,16 +34,7 @@ class _SuggestViewState extends State<SuggestView> {
   }
 
   final _formKey = GlobalKey<FormState>();
-  final _subjectController = TextEditingController();
-  final _equipmentController = TextEditingController();
   DateTime? _date;
-
-  @override
-  void dispose() {
-    _subjectController.dispose();
-    _equipmentController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class _SuggestViewState extends State<SuggestView> {
         child: ListView(
           children: [
             TextFormField(
-              controller: _subjectController,
+              controller: _suggestViewModel.subjectController,
               decoration: const InputDecoration(
                 labelText: 'Sujet',
               ),
@@ -61,6 +63,7 @@ class _SuggestViewState extends State<SuggestView> {
             ),
             //SizedBox(height: 8),
             TextFormField(
+              controller: _suggestViewModel.bodyController,
               decoration: const InputDecoration(
                 hintText: 'Details',
                 border: OutlineInputBorder(),
@@ -68,18 +71,20 @@ class _SuggestViewState extends State<SuggestView> {
               maxLines: 5,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // Form is valid, submit data here
+                      _suggestViewModel.submit();
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16.0, horizontal: 24.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),

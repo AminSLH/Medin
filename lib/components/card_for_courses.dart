@@ -14,7 +14,6 @@ class CourseCard extends StatefulWidget {
     description = course.description;
     id = course.id;
     instructor = course.instructor;
-    price = course.price;
     date = course.date;
     seatsRemaining = course.seatsRemaining;
   }
