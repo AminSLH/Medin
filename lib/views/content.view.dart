@@ -3,9 +3,12 @@ import 'package:medin/models/content.model.dart';
 import 'package:medin/view_models/content.viewmodel.dart';
 import 'package:medin/views/course.view.dart';
 import 'package:medin/views/equipment.view.dart';
+import 'package:medin/views/faq.view.dart';
 import 'package:medin/views/suggest_course.view.dart';
+import 'package:medin/views/your_courses.view.dart';
 import 'package:provider/provider.dart';
 import 'package:medin/views/suggest.view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ContentView extends StatefulWidget {
   const ContentView({Key? key}) : super(key: key);
@@ -62,9 +65,9 @@ class _ContentViewState extends State<ContentView> {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text(
-                    _contentViewModel.currentUser?.displayName ?? 'tester one'),
-                accountEmail: const Text('tester1@example.com'),
+                accountName: Text('Amine'),
+                accountEmail:
+                    Text(FirebaseAuth.instance.currentUser!.email! ?? 'Guest'),
                 currentAccountPicture: const CircleAvatar(
                   backgroundImage: NetworkImage(
                     'https://randomuser.me/api/portraits/men/2.jpg',
@@ -84,13 +87,11 @@ class _ContentViewState extends State<ContentView> {
                 leading: const Icon(Icons.menu_book),
                 title: const Text('Vos formations'),
                 onTap: () {
-                  //TODO: add archive page
-
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => const ArchivePage()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const YourCoursesView()),
+                  );
                 },
               ),
               /*
@@ -100,14 +101,16 @@ class _ContentViewState extends State<ContentView> {
           onTap: () {
             // naviguer vers l'écran de paramètres de l'application
           },
-          
+
         ),*/
               const Divider(),
               ListTile(
                 leading: const Icon(Icons.help),
-                title: const Text('Aide et commentaires'),
+                title: const Text('Aide et FAQ'),
                 onTap: () {
-                  // naviguer vers l'écran d'aide et de commentaires
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const FaqView();
+                  }));
                 },
               ),
               ListTile(

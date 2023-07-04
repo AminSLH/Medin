@@ -21,10 +21,10 @@ class EquipmentRepoImpl extends EquipmentRepo {
     equipmentList = List<EquipmentModel>.empty(growable: true);
     final fbDatabase = FirebaseDatabase.instance;
     fbDatabase.setPersistenceEnabled(true);
-    final fbEquipemtnRef = fbDatabase.ref('equipment');
-    fbEquipemtnRef.keepSynced(true);
+    final fbEquipmentRef = fbDatabase.ref('equipment');
+    fbEquipmentRef.keepSynced(true);
 
-    fbEquipemtnRef.onValue.listen((event) {
+    fbEquipmentRef.onValue.listen((event) {
       equipmentList.clear();
       Map<dynamic, dynamic> data =
           event.snapshot.value as Map<dynamic, dynamic>;

@@ -58,6 +58,20 @@ class _SuggestCourseViewState extends State<SuggestCourseView> {
                   },
                 ),
                 TextFormField(
+                  controller: _suggestCourseViewModel.numberOfSeatsController,
+                  decoration: const InputDecoration(
+                    labelText: 'Nombre de places',
+                  ),
+                  validator: (value) {
+                    if (value == null ||
+                        value.isEmpty ||
+                        int.tryParse(value) == null) {
+                      return 'Veuillez saisir un entier.';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
                   controller: _suggestCourseViewModel.equipmentController,
                   decoration: const InputDecoration(
                     labelText: 'Équipement requis',

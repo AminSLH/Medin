@@ -16,6 +16,7 @@ class SuggestCoursesViewModel with ChangeNotifier {
   final equipmentController = TextEditingController();
   late DateTime date;
   final bodyController = TextEditingController();
+  final numberOfSeatsController = TextEditingController();
   late SuggestCoursesRepo suggestCoursesRepo;
 
   SuggestCoursesViewModel() {
@@ -32,13 +33,24 @@ class SuggestCoursesViewModel with ChangeNotifier {
       date: DateFormat('dd/MM/yyyy').format(date),
       attendees: [fbauth.currentUser!.uid],
       equipmentReserved: List.from(equipmentController.text.split(',')),
-      instructor: 'UNASSIGNED',
+      instructor: 'Amine',
       time: '09:15',
-      seatsRemaining: 0,
+      seatsRemaining: int.parse(numberOfSeatsController.text),
       state: 'Requested',
     ));
     subjectController.clear();
+    numberOfSeatsController.clear();
     equipmentController.clear();
     bodyController.clear();
+
+    ScaffoldMessengerState messengerState = scaffoldMessengerKey.currentState!;
+    messengerState.showSnackBar(
+      const SnackBar(
+        content: Text('Succès!'),
+        showCloseIcon: true,
+        duration: Duration(seconds: 5),
+      ),
+    );
+    navigatorKey.currentState!.pop();
   }
 }

@@ -1,5 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:medin/models/course.model.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CourseCard extends StatefulWidget {
   late String? title;
@@ -23,13 +26,28 @@ class CourseCard extends StatefulWidget {
 }
 
 class _CourseCardState extends State<CourseCard> {
+  final fbCourseRef = FirebaseDatabase.instance.ref('Trainings');
+  final fbAuth = FirebaseAuth.instance;
   bool isSpotReserved = false;
+  Future<bool> checkSpotReserved() async {
+    var snapshot = await fbCourseRef.child(widget.id!).child('attendees').get();
+    var attendees = snapshot.value as Map<dynamic, dynamic>;
+    if (attendees.containsKey(fbAuth.currentUser?.uid)) {
+      isSpotReserved = true;
+      return true;
+    } else {
+      isSpotReserved = false;
+      return false;
+    }
+  }
+
   bool isSpotAvailable(seatsRemaining) {
     return seatsRemaining > 0;
   }
 
   @override
   Widget build(BuildContext context) {
+    checkSpotReserved();
     return Card(
       margin: const EdgeInsets.all(16),
       child: Row(
@@ -62,47 +80,59 @@ class _CourseCardState extends State<CourseCard> {
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed:
-                      isSpotReserved || !isSpotAvailable(widget.seatsRemaining)
-                          ? null
-                          : () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: const Text('Confirmation'),
-                                    content: const Text(
-                                      'Voulez-vous réserver une place pour cette formation ?',
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: const Text('Annuler'),
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            isSpotReserved = true;
-                                          });
-                                          Navigator.of(context).pop();
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                              content: Text(
-                                                'Votre demande est en attente de confirmation.',
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        child: const Text('Confirmer'),
-                                      ),
-                                    ],
-                                  );
-                                },
+                  onPressed: isSpotReserved ||
+                          !isSpotAvailable(widget.seatsRemaining)
+                      ? null
+                      : () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Confirmation'),
+                                content: const Text(
+                                  'Voulez-vous réserver une place pour cette formation ?',
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('Annuler'),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        //
+                                        fbCourseRef
+                                            .child(widget.id!)
+                                            .child('attendees')
+                                            .update({
+                                          (FirebaseAuth
+                                                  .instance.currentUser?.uid ??
+                                              'Guest'): {
+                                            'id': (fbAuth.currentUser?.uid ??
+                                                'Guest'),
+                                            'accepted': false,
+                                          },
+                                        });
+                                      });
+                                      Navigator.of(context).pop();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                            'Votre demande est en attente de confirmation.',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: const Text('Confirmer'),
+                                  ),
+                                ],
                               );
                             },
+                          );
+                        },
                   style: isSpotReserved
                       ? ElevatedButton.styleFrom(
                           backgroundColor: Colors.yellow[700],
