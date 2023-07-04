@@ -65,12 +65,14 @@ class _ContentViewState extends State<ContentView> {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text('Amine'),
+                accountName: FirebaseAuth.instance.currentUser?.email == null
+                    ? Text('Guest')
+                    : Text('Amine'),
                 accountEmail:
-                    Text(FirebaseAuth.instance.currentUser!.email! ?? 'Guest'),
+                    Text(FirebaseAuth.instance.currentUser?.email ?? 'Guest'),
                 currentAccountPicture: const CircleAvatar(
                   backgroundImage: NetworkImage(
-                    'https://randomuser.me/api/portraits/men/2.jpg',
+                    'https://cdn-icons-png.flaticon.com/512/149/149071.png',
                   ),
                 ),
                 // decoration: BoxDecoration(
@@ -143,7 +145,7 @@ class _ContentViewState extends State<ContentView> {
           ContentPage.equipment,
           ContentPage.suggest
         ].indexOf(_currentPage),
-        destinations: const [
+        destinations:  [
           NavigationDestination(
             icon: Icon(Icons.group),
             label: 'Courses',

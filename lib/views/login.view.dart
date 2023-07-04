@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medin/view_models/login.viewmodel.dart';
+import 'package:medin/views/guest.view.dart';
 import 'package:medin/views/signup.view.dart';
 import 'package:provider/provider.dart';
 
@@ -85,7 +86,15 @@ class _LoginViewState extends State<LoginView> {
                                 child: const Text('Sign up'),
                               ),
                               ElevatedButton(
-                                onPressed: _loginViewModel.guestAuth,
+                                // onPressed: _loginViewModel.guestAuth,
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const GuestView()),
+                                  );
+                                },
                                 child: const Text('Guest Mode'),
                               ),
                             ],

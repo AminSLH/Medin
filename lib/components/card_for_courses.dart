@@ -95,55 +95,67 @@ class _CourseCardState extends State<CourseCard> {
                                 !isSpotAvailable(widget.seatsRemaining)
                             ? null
                             : () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      title: const Text('Confirmation'),
-                                      content: const Text(
-                                        'Voulez-vous réserver une place pour cette formation ?',
-                                      ),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: const Text('Annuler'),
+                                if (FirebaseAuth.instance.currentUser?.email !=
+                                    null) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: const Text('Confirmation'),
+                                        content: const Text(
+                                          'Voulez-vous réserver une place pour cette formation ?',
                                         ),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              //
-                                              fbCourseRef
-                                                  .child(widget.id!)
-                                                  .child('attendees')
-                                                  .update({
-                                                (FirebaseAuth.instance
-                                                        .currentUser?.uid ??
-                                                    'Guest'): {
-                                                  'id': (fbAuth
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('Annuler'),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                //
+                                                fbCourseRef
+                                                    .child(widget.id!)
+                                                    .child('attendees')
+                                                    .update({
+                                                  (FirebaseAuth.instance
                                                           .currentUser?.uid ??
-                                                      'Guest'),
-                                                  'accepted': false,
-                                                },
+                                                      'Guest'): {
+                                                    'id': (fbAuth
+                                                            .currentUser?.uid ??
+                                                        'Guest'),
+                                                    'accepted': false,
+                                                  },
+                                                });
                                               });
-                                            });
-                                            Navigator.of(context).pop();
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                content: Text(
-                                                  'Votre demande est en attente de confirmation.',
+                                              Navigator.of(context).pop();
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                    'Votre demande est en attente de confirmation.',
+                                                  ),
                                                 ),
-                                              ),
-                                            );
-                                          },
-                                          child: const Text('Confirmer'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
+                                              );
+                                            },
+                                            child: const Text('Confirmer'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        '❌  Vous devez être connecté pour réserver une place.',
+                                      ),
+                                    ),
+                                  );
+                                }
+                                ;
                               },
                         style: isSpotReserved
                             ? ElevatedButton.styleFrom(
