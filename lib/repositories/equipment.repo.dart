@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:medin/models/equipment.model.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -29,7 +28,7 @@ class EquipmentRepoImpl extends EquipmentRepo {
       Map<dynamic, dynamic> data =
           event.snapshot.value as Map<dynamic, dynamic>;
       data.forEach((key, value) async {
-        debugPrint("%%%%key: $key, value: $value%%%%");
+        // debugPrint("%%%%key: $key, value: $value%%%%");
         var url = (value['image'] == null)
             ? null
             : (await fbImagesRef.child(value['image']).getDownloadURL());

@@ -2,7 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:medin/components/equipment_selector.dart';
 import 'package:medin/models/course.model.dart';
+import 'package:medin/models/equipment.model.dart';
+import 'package:medin/repositories/equipment.repo.dart';
 import 'package:medin/repositories/suggest_courses.repo.dart';
 import 'package:medin/utils/keys.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +21,9 @@ class SuggestCoursesViewModel with ChangeNotifier {
   final bodyController = TextEditingController();
   final numberOfSeatsController = TextEditingController();
   late SuggestCoursesRepo suggestCoursesRepo;
+  List<String> selectedEquipment = [];
+  late EquipmentRepo _equipmentRepo;
+  late List<EquipmentModel> equipmentList;
 
   SuggestCoursesViewModel() {
     date = DateTime.now();
@@ -32,7 +38,7 @@ class SuggestCoursesViewModel with ChangeNotifier {
       description: bodyController.text,
       date: DateFormat('dd/MM/yyyy').format(date),
       attendees: Map<dynamic, dynamic>(),
-      equipmentReserved: List.from(equipmentController.text.split(',')),
+      equipmentReserved: selectedEquipment,
       instructor: 'Amine',
       time: '09:15',
       seatsRemaining: int.parse(numberOfSeatsController.text),
@@ -52,5 +58,17 @@ class SuggestCoursesViewModel with ChangeNotifier {
       ),
     );
     navigatorKey.currentState!.pop();
+  }
+
+  void selectEquipment() {
+    _equipmentRepo =
+        Provider.of<EquipmentRepo>(navigatorKey.currentContext!, listen: false);
+    equipmentList = _equipmentRepo.fetchData();
+    showDialog(
+      context: navigatorKey.currentContext!,
+      builder: (BuildContext context) {
+        return EquipmentSelector(equipmentList: equipmentList);
+      },
+    );
   }
 }

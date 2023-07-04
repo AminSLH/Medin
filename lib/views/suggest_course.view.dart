@@ -71,12 +71,15 @@ class _SuggestCourseViewState extends State<SuggestCourseView> {
                     return null;
                   },
                 ),
-                TextFormField(
-                  controller: _suggestCourseViewModel.equipmentController,
-                  decoration: const InputDecoration(
-                    labelText: 'Équipement requis',
+                const ListTile(
+                  title: Text(
+                    'Équipement requis',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
+                ElevatedButton(
+                    onPressed: _suggestCourseViewModel.selectEquipment,
+                    child: Text('Réserver')),
                 const ListTile(
                     title: Text(
                   'Date proposée:',
