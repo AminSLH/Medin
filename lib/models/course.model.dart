@@ -6,7 +6,7 @@ class CourseModel {
   final String? date;
   final String? time;
   final int seatsRemaining;
-  final List<String>? attendees;
+  final Map<dynamic, dynamic>? attendees;
   final List<String>? equipmentReserved;
   final String? state;
 

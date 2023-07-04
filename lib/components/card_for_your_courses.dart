@@ -12,6 +12,7 @@ class YourCoursesCard extends StatefulWidget {
   late String? price;
   late String? date;
   late int seatsRemaining;
+  late Map<dynamic, dynamic>? attendees;
   YourCoursesCard({super.key, required CourseModel course}) {
     title = course.title;
     description = course.description;
@@ -19,6 +20,7 @@ class YourCoursesCard extends StatefulWidget {
     instructor = course.instructor;
     date = course.date;
     seatsRemaining = course.seatsRemaining;
+    attendees = course.attendees;
   }
 
   @override
@@ -30,18 +32,16 @@ class _YourCoursesCardState extends State<YourCoursesCard> {
   final fbAuth = FirebaseAuth.instance;
   bool isSpotReserved = true;
 
-  @override
-  void initState() async {
-    await checkSpotReserved();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   checkSpotReserved();
+  //   super.initState();
+  // }
 
-  Future<bool> checkSpotReserved() async {
-    var snapshot = await fbCourseRef.child(widget.id!).child('attendees').get();
-    var attendees = snapshot.value as Map<dynamic, dynamic>;
-    debugPrint(attendees.toString());
-    if (attendees.containsKey(fbAuth.currentUser?.uid)) {
-      if (attendees[fbAuth.currentUser?.uid]['accepted'] == true) {
+  bool checkSpotReserved() {
+    // debugPrint(attendees.toString());
+    if (widget.attendees?.containsKey(fbAuth.currentUser?.uid) ?? false) {
+      if (widget.attendees?[fbAuth.currentUser?.uid]['accepted'] == true) {
         isSpotReserved = false;
         return false;
       } else {

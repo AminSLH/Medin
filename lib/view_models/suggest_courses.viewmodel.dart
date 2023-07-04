@@ -31,7 +31,7 @@ class SuggestCoursesViewModel with ChangeNotifier {
       title: subjectController.text,
       description: bodyController.text,
       date: DateFormat('dd/MM/yyyy').format(date),
-      attendees: [fbauth.currentUser!.uid],
+      attendees: Map<dynamic, dynamic>(),
       equipmentReserved: List.from(equipmentController.text.split(',')),
       instructor: 'Amine',
       time: '09:15',

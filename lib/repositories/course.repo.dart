@@ -30,7 +30,7 @@ class CourseRepoImpl extends CourseRepo {
             date: value['date'],
             seatsRemaining: value['spotsAvailable'],
             time: null,
-            attendees: null,
+            attendees: value['attendees'],
             equipmentReserved: null,
             state: value['state'],
           ));
